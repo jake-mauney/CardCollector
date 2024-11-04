@@ -9,6 +9,8 @@ class cardview():
     resultdic = {}
 
     #Go through the results and print them out
-    rows = result.fetchall()
-    for rows in rows:
-        print (rows)
+    ThisCursor = result.fetchall()
+    for row in ThisCursor:
+        
+        
+        #print("* {Name}".format(Name=row['Name']))

@@ -11,7 +11,7 @@ class DBConnect():
         self.cnx = mysql.connector.connect(user = os.getenv('database_user'), password = os.getenv('pwd'), host=os.getenv('host'))
 
     def query(self, sql):
-        cursor = self.cnx.cursor()
+        cursor = self.cnx.cursor(dictionary=True)
         cursor.execute(sql)
         return cursor
         
