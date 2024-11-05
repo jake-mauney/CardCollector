@@ -1,4 +1,8 @@
 import tkinter as tk
+from CardCollectionUI import openCollection
+
+
+#Creates Window
 root = tk.Tk()
 root.title("Card Collector")
 #Header stuff
@@ -6,7 +10,7 @@ HeaderTxt = 'Welcome to the Card Collector backend!'
 headerLabel = tk.Label(text=HeaderTxt)
 
 #Buttons
-CardViewButton = tk.Button(root, text="View Collection")
+CardViewButton = tk.Button(root, text="View Collection", command=openCollection)
 DeckViewButton = tk.Button(root, text="Decks")
 PriceUpdateButton = tk.Button(root, text="Price Update")
 
