@@ -11,9 +11,13 @@ class DBConnect():
         self.cnx = mysql.connector.connect(user = os.getenv('database_user'), password = os.getenv('pwd'), host=os.getenv('host'))
 
     def query(self, sql):
+        queryresult = {}
         cursor = self.cnx.cursor(dictionary=True)
         cursor.execute(sql)
-        return cursor
+        rows = cursor.fetchall()
+        #for rows in rows:
+            #queryresult.append(rows)
+        return rows
         
 
 
