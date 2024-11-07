@@ -1,5 +1,6 @@
 import tkinter as tk
 from CardCollectionUI import openCollection
+from importcsv import fileimport
 
 
 #Creates Window
@@ -19,7 +20,7 @@ menubar = tk.Menu(root)
 #Creates "File" var for the menu
 filemenu = tk.Menu(menubar, tearoff=0)
 #Creates the "Import Cards option"
-filemenu.add_command(label="Import Cards")
+filemenu.add_command(label="Import Cards", command=fileimport)
 filemenu.add_command(label="Quit" ,command=root.quit)
 #Sets the file option in the menu
 menubar.add_cascade(label="File", menu=filemenu)
