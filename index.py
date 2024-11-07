@@ -1,7 +1,7 @@
 import tkinter as tk
 from CardCollectionUI import openCollection
 from importcsv import fileimport
-from DeckIndex import deckCollection
+from DeckIndexUI import deckCollection
 
 
 #Creates Window
