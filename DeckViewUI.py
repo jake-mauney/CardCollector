@@ -11,7 +11,7 @@ def openDeck(deckId):
 
     #Grab the deck list entries from DB
     c = DBconnect.DBConnect()
-    result = c.query("SELECT CardCollector.Card.Name, CardCollector.DeckCard.Location FROM CardCollector.Card JOIN CardCollector.DeckCard ON CardCollector.DeckCard.Card_Id = CardCollector.Card.idCards WHERE CardCollector.DeckCard.Deck_Id = %s", (deckId,))
+    result = c.query("SELECT CardCollector.Card.Name, CardCollector.DeckCard.Location FROM CardCollector.Card JOIN CardCollector.DeckCard ON CardCollector.DeckCard.Card_Id = CardCollector.Card.idCards WHERE CardCollector.DeckCard.Deck_Id = %s ORDER BY Location", (deckId,))
     print(deckId)
 
     #sets hight of crad based on how many results
