@@ -18,6 +18,12 @@ class DBConnect():
         #for rows in rows:
             #queryresult.append(rows)
         return rows
+    
+    def cursor(self):
+        return self.cnx.cursor()
+    
+    def commit(self):
+        return self.cnx.commit()
         
 
 
