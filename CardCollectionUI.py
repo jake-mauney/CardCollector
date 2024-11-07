@@ -5,7 +5,7 @@ def openCollection():
 
     #Main window
     root = tk.Tk()
-    root.title("Card Collection")
+    root.title("Collection of Cards")
 
 
     #Header Text
