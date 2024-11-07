@@ -10,11 +10,17 @@ class DBConnect():
     def __init__(self):
         self.cnx = mysql.connector.connect(user = os.getenv('database_user'), password = os.getenv('pwd'), host=os.getenv('host'))
 
-    def query(self, sql):
-        cursor = self.cnx.cursor(dictionary=True)
-        cursor.execute(sql)
-        rows = cursor.fetchall()
-        return rows
+    def query(self, sql, args=None):
+        if not args:
+            cursor = self.cnx.cursor(dictionary=True)
+            cursor.execute(sql)
+            rows = cursor.fetchall()
+            return rows
+        else:
+            cursor = self.cnx.cursor(dictionary=True)
+            cursor.execute(sql, args)
+            rows = cursor.fetchall()
+            return rows
     
     def cursor(self):
         return self.cnx.cursor()

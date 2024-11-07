@@ -1,16 +1,16 @@
 import tkinter as tk
 import DBconnect
+from DeckViewUI import openDeck
 
 def deckCollection():
     connect = DBconnect.DBConnect()
 
-    listOfDecks = connect.query("SELECT Name FROM CardCollector.Deck;")
-    print(len(listOfDecks))
+    listOfDecks = connect.query("SELECT Name, idDeck FROM CardCollector.Deck;")
 
     root = tk.Tk()
     root.title("Your Decks")
     for i in range(len(listOfDecks)):
-        newButton = tk.Button(root, text=str(listOfDecks[i]["Name"]))
+        newButton = tk.Button(root, text=str(listOfDecks[i]["Name"]), command=lambda i=i : openDeck(listOfDecks[i]["idDeck"])) #i=i freezes the i value for the button
         newButton.grid(row=i,column=1)
     root.mainloop()
 

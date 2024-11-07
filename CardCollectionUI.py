@@ -15,7 +15,7 @@ def openCollection():
     #Connect to DB
     c = DBconnect.DBConnect()
     result = c.query("SELECT Name, SetCode, SetNum, Price FROM CardCollector.Card;")
-    print(result)
+    #print(result)
     #print("The first card is " + result[0]["Name"])
     
     
