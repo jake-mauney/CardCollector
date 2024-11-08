@@ -12,7 +12,8 @@ def updateprice(setcode, setnum, idCard, foil):
         data = response.json()
         values = [data['prices']['usd'],datetime.today().strftime('%Y-%m-%d'),idCard]
         cursor.execute("INSERT INTO CardCollector.Price (price,date,RelCard_Id) VALUES (%s, %s, %s)",(values))
-        c.commit
+        c.commit()
+        
         
     else:
         reqeust_url = "https://api.scryfall.com/cards/"+setcode+"/"+setnum

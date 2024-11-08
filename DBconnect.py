@@ -27,6 +27,9 @@ class DBConnect():
     
     def commit(self):
         return self.cnx.commit()
+    
+    def close(self):
+        return self.cnx.close()
         
 
 
