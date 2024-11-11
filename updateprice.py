@@ -13,6 +13,8 @@ def updateprice(setcode, setnum, idCard, foil):
         values = [data['prices']['usd'],datetime.today().strftime('%Y-%m-%d'),idCard]
         cursor.execute("INSERT INTO CardCollector.Price (price,date,RelCard_Id) VALUES (%s, %s, %s)",(values))
         c.commit()
+        cursor.execute("UPDATE CardCollector.Card INNER JOIN CardCollector.Price ON CardCollector.Price.RelCard_Id = CardCollector.Card.idCards SET CardCollector.Card.Price = CardCollector.Price.price WHERE CardCollector.Price.idPrice = %s",(cursor.lastrowid,))
+        c.commit()
         
         
     else:

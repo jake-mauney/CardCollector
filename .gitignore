@@ -1,4 +1,4 @@
 .env
 __pycache__/
 SQL Cheats.txt
-
+.DS_Store
