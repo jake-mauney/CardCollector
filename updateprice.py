@@ -18,7 +18,7 @@ def updateprice(setcode, setnum, idCard, foil):
         
         
     else:
-        reqeust_url = "https://api.scryfall.com/cards/"+setcode+"/"+setnum
+        reqeust_url = "https://api.scryfall.com/cards/"+setcode.lower()+"/"+setnum
         response = requests.get(reqeust_url)
         data = response.json()
         print(data['prices']['usd_foil'])
