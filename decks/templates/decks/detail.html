@@ -2,13 +2,13 @@
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <title>Card Collection</title>
+    <title>Deck Collection Detail</title>
   </head>
   <body>
     {% if collection %}
     <ul>
-    {% for card in collection %}
-        <li><a href = "/cards/{{card.id}}">{{ card.name }}</a></li>
+    {% for deckentry in collection %}
+        <li><a href = "/decks/{{deckentry.rel_deck}}/{{deckentry.id}}">{{ deckentry.rel_card }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
