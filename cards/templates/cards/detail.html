@@ -9,5 +9,16 @@
     <p>{{ card_set }}</p>
     <p>{{ set_num }}</p>
     <p>{{ foil }}</p>
+
+    {% if likeCollection %}
+    <p>Other Printing</p>
+    <ul>
+      {% for card in likeCollection %}
+          <li><a href = "/cards/{{card.id}}">{{ card.name }} {{ card.set_code }} {{card.set_num}}</a></li>
+      {% endfor %}
+      </ul>
+  {% else %}
+      <p>No other printings in your collection</p>
+  {% endif %}
   </body>
 </html>
