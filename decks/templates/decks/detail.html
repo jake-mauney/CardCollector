@@ -6,9 +6,10 @@
   </head>
   <body>
     {% if collection %}
+    <p>Cards in {{ deck.name }}</p>
     <ul>
     {% for deckentry in collection %}
-        <li><a href = "/decks/{{deckentry.rel_deck}}/{{deckentry.id}}">{{ deckentry.rel_card }}</a></li>
+        <li><a href = "/cards/{{deckentry.rel_card.id}}">{{ deckentry.rel_card }} - {{ deckentry.rel_card.set_code}}</a></li>
     {% endfor %}
     </ul>
 {% else %}

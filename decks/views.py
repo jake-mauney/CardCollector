@@ -9,7 +9,8 @@ def index(request):
 
 def detail(request, deck_id):
     entry_collection = DeckEntry.objects.filter(rel_deck=deck_id)
-    context = {"collection": entry_collection}
+    deck = Deck.objects.get(pk=deck_id)
+    context = {"collection": entry_collection, "deck": deck}
     return render(request, "decks/detail.html", context)
 
 
