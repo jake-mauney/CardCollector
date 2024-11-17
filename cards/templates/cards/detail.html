@@ -5,6 +5,11 @@
     <title>Card Detail</title>
   </head>
   <body>
+    <ul style="display: inline;">
+    {% for item in items %}
+      <li style="display: inline-block;"><a href = "{{item.url}}">{{ item.title }}</a></li>
+    {% endfor %}
+    </ul>
     <h1>{{ card_name }}</h1>
     <p>{{ card_set }}</p>
     <p>{{ set_num }}</p>
