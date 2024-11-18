@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Card Collection</title>
+  </head>
+  <body>
+    <header>
+      <ul style="display: inline;">
+          {% for item in items %}
+            <li style="display: inline-block;"><a href = "{{item.url}}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+</header>
+{% block content %}
+
+{% endblock %}
+</body>
+</html>
+

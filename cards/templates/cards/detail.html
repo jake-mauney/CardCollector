@@ -1,20 +1,10 @@
-<!doctype html>
-<html lang="en-US">
-  <head>
-    <meta charset="utf-8" />
-    <title>Card Detail</title>
-  </head>
-  <body>
-    <ul style="display: inline;">
-    {% for item in items %}
-      <li style="display: inline-block;"><a href = "{{item.url}}">{{ item.title }}</a></li>
-    {% endfor %}
-    </ul>
+{% extends "siteutils/base.html" %}
+
+{% block content %}
     <h1>{{ card_name }}</h1>
     <p>{{ card_set }}</p>
     <p>{{ set_num }}</p>
     <p>{{ foil }}</p>
-
     {% if likeCollection %}
     <p>Other Printing</p>
     <ul>
@@ -25,5 +15,4 @@
   {% else %}
       <p>No other printings in your collection</p>
   {% endif %}
-  </body>
-</html>
+{% endblock %}
