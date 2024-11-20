@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Deck, DeckEntry, Card
 from siteutils.models import menu_items
+from .models import Card
 from django.db.models import Count
 from django.db.models import Subquery
 
