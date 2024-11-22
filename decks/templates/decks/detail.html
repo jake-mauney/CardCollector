@@ -4,7 +4,7 @@
     <p>Cards in {{ deck.name }}</p>
     <ul>
     {% for deckentry in collection %}
-        <li><a href = "/cards/{{deckentry.rel_card.id}}">{{ deckentry.name }} - {{ deckentry.count }}</a></li>
+        <li><a href = "/cards/{{deckentry.id}}">{{ deckentry.name }} - {{ deckentry.count }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
