@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def cardImport():
-    return 'null'
+def importpage(request):
+    return render(request, 'cardImport/Import.html')

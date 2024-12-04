@@ -24,8 +24,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cards/', include("cards.urls")),
     path('decks/', include("decks.urls")),
-    path('import', include('cardImport.urls')),
+    path('import/', include('cardImport.urls')),
     path('', views.index, name = 'index'),
+    
     
 ]
 static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
