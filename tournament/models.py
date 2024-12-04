@@ -17,4 +17,15 @@ class Registration(models.Model): #join between user deck and tournament
         return str(self.player) + " - " + str(self.tournament)
 
 class Match(models.Model):
-    Player1 = models.ForeignKey(Player, on_delete=models.PROTECT)
+    Player1 = models.ForeignKey(Player, on_delete=models.PROTECT, related_name="Player1") #related name so I can use two foreign key field with Player
+    Player2 = models.ForeignKey(Player, on_delete=models.PROTECT, related_name="Player2")
+    P1WinCount = models.IntegerField() #win for each so each player can report and validation
+    P2WinCount = models.IntegerField()
+    P1LoseCount = models.IntegerField()
+    P2LoseCount = models.IntegerField()
+    DrawCount = models.IntegerField()
+    tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
+    MatchNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
+
+    def __str__(self):
+        return str(self.Player1)+" - "+str(self.Player2)
