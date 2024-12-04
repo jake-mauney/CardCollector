@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'decks.apps.DecksConfig',
     'siteutils.apps.SiteutilsConfig',
     'cardImport.apps.CardimportConfig',
+    'tournament.apps.TournamentConfig',
+   
+
     
 
 ]
