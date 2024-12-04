@@ -1,0 +1,24 @@
+{% extends "siteutils/base.html" %}
+
+{% block content %}
+
+{% if form %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}</br>
+    <button type="submit" class="btn btn-secondary">Create</button>
+</form>
+{% endif %}
+
+{% if TourList %}
+    <ul> 
+        {% for tour in TourList %}
+            <li><a href = "/tournament/{{tour.id}}">{{ tour.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No tournaments are available.</p>
+{% endif %}
+
+{% endblock %}
+
