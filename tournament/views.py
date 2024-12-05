@@ -19,3 +19,9 @@ def TourHome(request):
         #actually create the record
         newTour = Tournament.objects.create(title=title_form, game = game_form, format = format_form  )
     return render (request, "tournament/tourhome.html", context)
+
+def TourDetails(request, tour_id):
+    tournament = Tournament.objects.get(pk=tour_id)
+    context = {"Tournament": tournament}
+    return render(request, "tournament/details", context)
+
