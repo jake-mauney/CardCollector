@@ -2,7 +2,13 @@
 
 {% block content %}
 
-<p>tournament create page</p>
+{% if form %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}</br>
+    <button type="submit" class="btn btn-secondary">Create</button>
+</form>
+{% endif %}
 
 {% endblock %}
 

@@ -2,11 +2,20 @@
 
 {% block content %}
 
-{% if tournament %}
+{% if Tournament %}
 
-<p>{{ tournament.title }}</p>
-
+<p>{{ Tournament.title }}</p>
+<p>Register Players</p>
+<ul>
+{% for player in Players %}
+<li>{{ player.player }}</li>
+    {% endfor %}
+</ul>
 {% endif %}
+
+<br></br>
+
+<button><a href="/tournament/register/{{Tournament.id}}">Register</a></button>
 
 {% endblock %}
 

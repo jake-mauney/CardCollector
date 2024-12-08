@@ -3,8 +3,10 @@ from .forms import TournamentCreateForm
 from .models import Tournament, Registration, Match
 
 def TourCreate(request):
-    
-    return render (request, "tournament/createtour.html")
+
+    form = TournamentCreateForm(request.POST or None)
+    context = {"form": form}
+    return render (request, "tournament/createtour.html", context)
 
 def TourHome(request):
     TourList = Tournament.objects.all()
@@ -22,6 +24,11 @@ def TourHome(request):
 
 def TourDetails(request, tour_id):
     tournament = Tournament.objects.get(pk=tour_id)
-    context = {"Tournament": tournament}
-    return render(request, "tournament/details", context)
+    RegPlayers = Registration.objects.filter(tournament = tour_id)
+    context = {"Tournament": tournament, "Players": RegPlayers}
+    return render(request, "tournament/tourdetail.html", context)
 
+def Register(request, tour_id):
+    tournament = Tournament.objects.get(pk=tour_id)
+    context = {"Tournament": tournament}
+    return render(request, "tournament/register.html", context)
