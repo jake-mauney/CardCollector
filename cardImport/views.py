@@ -7,7 +7,7 @@ from siteutils.models import menu_items
 def importpage(request):
     items = menu_items.objects.all() #menu items
     today = datetime.datetime.now()
-    form = CreateImport(request.POST,request.FILES, initial={'request_date': today}) #Get the form to render on the page
+    form = CreateImport(request.POST,request.FILES) #Get the form to render on the page
     context = {"form": form, "items": items}
     if request.method == 'POST' and form.is_valid():
         #actually create the record
