@@ -5,8 +5,8 @@ import datetime
 from siteutils.models import menu_items
 
 def importpage(request):
-    items = menu_items.objects.all()
-    form = CreateImport(request.POST or None)
+    items = menu_items.objects.all() #menu items
+    form = CreateImport(request.POST or None) #Get the form to render on the page
     context = {"form": form, "items": items}
     if request.method == 'POST' and form.is_valid():
         #actually create the record

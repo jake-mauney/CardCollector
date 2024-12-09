@@ -5,7 +5,7 @@ import csv
 
 @receiver(post_save, sender=ImportRequest) #listens for when a import request is created
 def model_instance_created(sender, instance, created, **kwargs): 
-    if created:  #if created
+    if created:  #if created process the rows within the file
         reqeustRecord = ImportRequest.objects.get(pk=instance.pk)
         filename = 'userimport/'+str(reqeustRecord.csv_file)
         csv_file = csv.DictReader(open(filename))
