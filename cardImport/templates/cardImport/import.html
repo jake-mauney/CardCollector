@@ -2,4 +2,13 @@
 
 {% block content %}
 <p>import page</p>
+
+{% if form %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}</br>
+    <button type="submit" class="btn btn-secondary">Import</button>
+</form>
+{% endif %}
+
 {% endblock %}
