@@ -2,11 +2,13 @@ from django.db import models
 from decks.models import Deck
 from playerprofile.models import Player
 
-
+format_options = [('STANDARD', 'Standard'), ('PIONEER', 'Pioneer'), ('MODERN', 'Modern'), ('PAUPER', 'Pauper')]
+tour_status_options = [('PLANNED', 'Planned'), ('IN PROCESS', 'In Process'), ("COMPLETE", "Complete"), ("CANCELLED", "Cancelled")]
 class Tournament(models.Model):
     title = models.CharField(max_length=200)
     game = models.CharField(max_length=200)
-    format = models.CharField(max_length=200)
+    format = models.CharField(max_length=200, choices=format_options)
+    status = models.CharField(choices=tour_status_options, max_length=200)
     def __str__(self):
         return self.title
 
