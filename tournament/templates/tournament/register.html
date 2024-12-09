@@ -4,4 +4,13 @@
 
 <p>Register Page</p>
 
+{% if form %}
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}</br>
+    <button type="submit" class="btn btn-secondary">Register</button>
+</form>
+{% endif %}
+
 {% endblock %}
