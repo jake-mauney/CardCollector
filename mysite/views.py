@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from cards.models import Card
 from decks.models import Deck, DeckEntry
@@ -9,8 +9,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from tournament.views import TourHome
 
-items = menu_items.objects.all() #grab the menu items to be used within this file
+items = menu_items.objects.filter(login_logout = 'LOGIN') #grab the menu items to be used within this file
 
 def index(request): #home/login page
     card_collection = Card.objects.all() #.all is what made this work and grab all cards
@@ -49,5 +50,5 @@ def register(request):
         
         # Display an information message indicating successful account creation
         messages.info(request, "Account created Successfully!")
-        return redirect('/register/')
+        return redirect('/tournament') #once they register it will take them to the tour home page
     return render(request, 'mysite/registerUser.html', context)
