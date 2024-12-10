@@ -27,6 +27,7 @@ urlpatterns = [
     path('import/', include('cardImport.urls')),
     path('Import/', include('cardImport.urls')),
     path('', views.index, name = 'index'),
+    path('register/', views.register, name = 'registerUser'),
     path('tournament/', include('tournament.urls')),
     
     
