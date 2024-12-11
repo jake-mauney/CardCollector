@@ -29,6 +29,8 @@ urlpatterns = [
     path('', views.index, name = 'index'),
     path('register/', views.register, name = 'registerUser'),
     path('tournament/', include('tournament.urls')),
+    path('logout/', views.logoutView, name="logoutView"),
+
     
     
 ]

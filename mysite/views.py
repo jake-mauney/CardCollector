@@ -10,13 +10,28 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from tournament.views import TourHome
+from django.contrib.auth import logout
 
 items = menu_items.objects.filter(login_logout = 'LOGIN') #grab the menu items to be used within this file
 
 def index(request): #home/login page
-    card_collection = Card.objects.all() #.all is what made this work and grab all cards
-    context = {"collection": card_collection, "items": items}
-    return render(request, "mysite/index.html", context)
+    if request.user.is_authenticated: #if user is logged in goes to index.html template
+        context = {"items": items}
+        return render(request, 'mysite/index.html', context)
+    else:
+        if request.method == "POST": #if user is not logged in check to see if login post 
+            username = request.POST.get('username') 
+            pwd = request.POST.get('password')  
+            user = authenticate(request, username=username, password=pwd) #actually log in user
+            if user is not None: #if they logged in then they are redirected to index. 
+                login(request, user)
+                return redirect('index')
+            else:
+                messages.success(request, ('There was an issue logging in. Please try again.'))
+                return redirect('index')
+        else:
+            context = {"items": items}
+            return render(request, 'mysite/login.html', context)
 
 def register(request):
     context = {"items": items}
@@ -52,3 +67,7 @@ def register(request):
         messages.info(request, "Account created Successfully!")
         return redirect('/tournament') #once they register it will take them to the tour home page
     return render(request, 'mysite/registerUser.html', context)
+
+def logoutView(request):
+    logout(request)
+    return redirect('index')
