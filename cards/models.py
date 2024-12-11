@@ -1,10 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Card(models.Model): #creats the card model
     name = models.CharField(max_length=200)
     set_code = models.CharField(max_length=10)
     set_num = models.CharField(max_length=10)
     foil = models.BooleanField(default=False) 
+    owner = models.ForeignKey(User, on_delete=models.PROTECT)
     
     def __str__(self):
         return self.name #this makes it so that when the app general references the card model it will return the name rather than just the pure object

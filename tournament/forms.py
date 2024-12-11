@@ -5,7 +5,7 @@ from django.forms import ModelForm
 class TournamentCreateForm(ModelForm):
     class Meta:
         model = Tournament
-        fields = ['title','game','format']
+        fields = ['title','game','format', 'entry_fee'] 
 
 class RegisterTournament(ModelForm):
     class Meta:

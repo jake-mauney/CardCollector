@@ -16,7 +16,8 @@ items = menu_items.objects.filter(login_logout = 'LOGIN') #grab the menu items t
 
 def index(request): #home/login page
     if request.user.is_authenticated: #if user is logged in goes to index.html template
-        context = {"items": items}
+        logUser = request.user
+        context = {"items": items, "user": logUser }
         return render(request, 'mysite/index.html', context)
     else:
         if request.method == "POST": #if user is not logged in check to see if login post 
