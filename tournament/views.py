@@ -36,6 +36,7 @@ def TourDetails(request, tour_id): #Details of tournament when we click into it 
 
 def Register(request, tour_id): #Handle registration 
     items = menu_items.objects.all()
+    currUser = request.user
     tournament = Tournament.objects.get(pk=tour_id)
     currentRegistration = Registration.objects.filter(tournament = tour_id, player = request.user)
     if Registration.objects.filter(tournament = tour_id, player = request.user).exists(): #if you are already registered a record will be returned and context will not contain the form for html
@@ -44,9 +45,10 @@ def Register(request, tour_id): #Handle registration
         form = RegisterTournament(request.POST or None)
         if request.method == 'POST' and form.is_valid():
         #sets the values
-            player_form = form.cleaned_data['player']
+            player_form = request.user
             deck_form = form.cleaned_data['deck']
         #actually create the record
             newReg = Registration.objects.create(player=player_form, tournament = tournament, deck = deck_form  )
+            return redirect("/tournament/"+str(tournament.id))
         context = {"Tournament": tournament, "form": form, "items": items, "current": currentRegistration}
     return render(request, "tournament/register.html", context)

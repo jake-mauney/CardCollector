@@ -12,11 +12,12 @@ from django.contrib.auth.models import User
 from tournament.views import TourHome
 from django.contrib.auth import logout
 
-items = menu_items.objects.filter(login_logout = 'LOGIN') #grab the menu items to be used within this file
+ #grab the menu items to be used within this file
 
 def index(request): #home/login page
     if request.user.is_authenticated: #if user is logged in goes to index.html template
         logUser = request.user
+        items = menu_items.objects.filter(login_logout = 'LOGIN')
         context = {"items": items, "user": logUser }
         return render(request, 'mysite/index.html', context)
     else:
@@ -31,8 +32,9 @@ def index(request): #home/login page
                 messages.success(request, ('There was an issue logging in. Please try again.'))
                 return redirect('index')
         else:
-            context = {"items": items}
-            return render(request, 'mysite/login.html', context)
+            
+            
+            return render(request, 'mysite/login.html')
 
 def register(request):
     context = {"items": items}

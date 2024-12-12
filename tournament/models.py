@@ -17,8 +17,8 @@ class Tournament(models.Model):
         return self.title
 
 class Registration(models.Model): #join between user deck and tournament
-    deck = models.ForeignKey(Deck, on_delete=models.PROTECT)
     player = models.ForeignKey(User, on_delete=models.PROTECT)
+    deck = models.ForeignKey(Deck, on_delete=models.PROTECT)
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
     
     def __str__(self):
