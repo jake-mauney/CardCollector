@@ -3,9 +3,9 @@ from django.contrib.auth.models import User
 
 class Card(models.Model): #creats the card model
     name = models.CharField(max_length=200)
-    set_code = models.CharField(max_length=10)
-    set_num = models.CharField(max_length=10)
-    foil = models.BooleanField(default=False) 
+    set_code = models.CharField(max_length=10, null=True, blank=True)
+    set_num = models.CharField(max_length=10, null=True, blank=True)
+    foil = models.BooleanField(default=False, null=True, blank=True) 
     owner = models.ForeignKey(User, on_delete=models.PROTECT)
     
     def __str__(self):

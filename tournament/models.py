@@ -12,7 +12,7 @@ class Tournament(models.Model):
     status = models.CharField(choices=tour_status_options, max_length=200)
     entry_fee = models.DecimalField(max_digits=10, decimal_places=2)
     scheduled_date = models.DateField(null=True)
-    runner = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    runner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     def __str__(self):
         return self.title
 
