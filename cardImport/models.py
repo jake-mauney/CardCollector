@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #the picklist options referencd below. Not sure why it is in the format of SOMETHING, something
 status_options = [('NEW', 'new'), ('IN PROCESS', 'In Process'), ("DONE", "Done"), ("ERROR", "Error")]
@@ -10,6 +11,7 @@ class ImportRequest(models.Model):
     status = models.CharField(max_length= 10, choices=status_options) #used in case error handling is implemented
     error_msg = models.CharField(max_length=10000) 
     type = models.CharField(max_length=10, choices=request_type_options) #Importing in deck format or just a raw collection?
+    owner = models.ForeignKey(User, on_delete=models.PROTECT)
 
     
 
