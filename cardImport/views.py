@@ -4,6 +4,8 @@ from .models import ImportRequest
 import datetime
 from django.contrib.auth.models import User
 from siteutils.models import menu_items
+import mimetypes
+from django.http import HttpResponse
 
 def importpage(request):
     items = menu_items.objects.all() #menu items
@@ -17,3 +19,12 @@ def importpage(request):
         newImport.owner = request.user #pins the logged in user to the new record
         newImport.save() #commit the record to the DB. 
     return render(request, 'cardImport/Import.html', context)
+
+def download_card_template(reqeust):
+    filepath = 'cardImport/CardImport_Template.csv' #full path needed with file name as well. Will get permission error if this is not full path. 
+    filename = 'CardImport_Template.csv'
+    file = open(filepath, 'r') 
+    mime_type, _ = mimetypes.guess_type(filepath)
+    response = HttpResponse(file, content_type=mime_type)
+    response['Content-Disposition'] = "attachment; filename=%s" % filename
+    return response
