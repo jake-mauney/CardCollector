@@ -37,7 +37,7 @@ def index(request): #home/login page
             return render(request, 'mysite/login.html')
 
 def register(request):
-    context = {"items": items}
+    
      # Check if the HTTP request method is POST (form submission)
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
@@ -69,7 +69,7 @@ def register(request):
         # Display an information message indicating successful account creation
         messages.info(request, "Account created Successfully!")
         return redirect('/tournament') #once they register it will take them to the tour home page
-    return render(request, 'mysite/registerUser.html', context)
+    return render(request, 'mysite/registerUser.html')
 
 def logoutView(request):
     logout(request)
