@@ -1,0 +1,12 @@
+{% extends "siteutils/base.html" %}
+{%block content %}
+    {% if collection %}
+    <ul>
+    {% for deck in collection %}
+        <li><a href = "/decks/{{deck.id}}">{{ deck.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+{% endblock %}

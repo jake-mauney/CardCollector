@@ -1,0 +1,21 @@
+{% extends "siteutils/base.html" %}
+
+{% block content %}
+
+{% if Tournament %}
+
+<p>{{ Tournament.title }}</p>
+<p>Register Players</p>
+<ul>
+{% for player in Players %}
+<li>{{ player.player.first_name }} {{ player.player.last_name }}</li> <!--what is shown in the player table-->
+    {% endfor %}
+</ul>
+{% endif %}
+
+<br></br>
+
+<button><a href="/tournament/register/{{Tournament.id}}">Register</a></button>
+
+{% endblock %}
+

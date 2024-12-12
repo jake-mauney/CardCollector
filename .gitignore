@@ -2,3 +2,9 @@
 __pycache__/
 SQL Cheats.txt
 .DS_Store
+/Version_01/.env
+/Version_01/SQL Cheats.txt
+/mysite/__pycache__/
+/cards/__pycache__/
+/userimport/
+

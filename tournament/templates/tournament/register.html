@@ -1,0 +1,20 @@
+{% extends "siteutils/base.html" %}
+
+{% block content %}
+
+<p>Register Page</p>
+
+{% if form %} <!--if registered already form wont exsist so it will go to the else tag-->
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form }}</br>
+    <button type="submit" class="btn btn-secondary">Register</button>
+</form>
+
+{% else %}
+<p>You are already registered</p>
+
+{% endif %}
+
+{% endblock %}
