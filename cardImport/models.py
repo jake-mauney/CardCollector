@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 #the picklist options referencd below. Not sure why it is in the format of SOMETHING, something
 status_options = [('NEW', 'new'), ('IN PROCESS', 'In Process'), ("DONE", "Done"), ("ERROR", "Error")]
-request_type_options = [('CARD', 'Card'), ('DECK', 'deck')]
+request_type_options = [('CARD', 'Card'), ('DECK', 'Deck')]
 
 class ImportRequest(models.Model):
     request_date = models.DateTimeField(auto_now_add=True) #Just to keep track of when these are created and how long to process

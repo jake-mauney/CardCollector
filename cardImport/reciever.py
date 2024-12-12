@@ -12,16 +12,19 @@ def model_instance_created(sender, instance, created, **kwargs):
         filename = 'userimport/'+str(reqeustRecord.csv_file)
         csv_file = csv.DictReader(open(filename))
         result = {}
-        i=1
-        for row in csv_file:
-            result[i]=row
-            i+=1
-            import_name = row['name']
-            import_set_code = row['set_code']
-            import_set_num = row['set_num']
-            import_foil = row['foil']
-            import_owner = reqeustRecord.owner
-            newCard = Card.objects.create(name = import_name, set_code= import_set_code, set_num = import_set_num, foil=import_foil, owner = import_owner)
+        if reqeustRecord.type == 'CARD':
+            i=1
+            for row in csv_file:
+                result[i]=row
+                i+=1
+                import_name = row['name']
+                import_set_code = row['set_code']
+                import_set_num = row['set_num']
+                import_foil = row['foil']
+                import_owner = reqeustRecord.owner
+                newCard = Card.objects.create(name = import_name, set_code= import_set_code, set_num = import_set_num, foil=import_foil, owner = import_owner)
+            else:
+                print("imported deck") #I dunno how to handle deck import
         print(result)
         
     else:
