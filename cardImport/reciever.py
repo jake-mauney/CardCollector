@@ -2,6 +2,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import ImportRequest
 import csv
+from cards.models import Card
 
 
 @receiver(post_save, sender=ImportRequest) #listens for when a import request is created
@@ -19,6 +20,8 @@ def model_instance_created(sender, instance, created, **kwargs):
             import_set_code = row['set_code']
             import_set_num = row['set_num']
             import_foil = row['foil']
+            import_owner = reqeustRecord.owner
+            newCard = Card.objects.create(name = import_name, set_code= import_set_code, set_num = import_set_num, foil=import_foil, owner = import_owner)
         print(result)
         
     else:
