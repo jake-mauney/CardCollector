@@ -1,0 +1,23 @@
+{% extends "siteutils/base.html" %}
+
+{% block content %}
+
+{% if Matches %}
+
+<ul>
+    {% for match in Matches %}
+    <li>
+        <b><a href="/tournament/match/{{ match.id }}">{{ match.Player1 }}</b> vs <b>{{ match.Player2 }}</b></a>
+    </li>
+    {% endfor %}
+
+    {% if bye %}
+    {% for by in bye %}
+    <li>{{ by.Player1.first_name }} got the bye</li>
+    {% endfor %}
+    {% endif %}
+</ul>
+
+{% endif %}
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Tournament, Registration
+from .models import Tournament, Registration, Match
 from django.forms import ModelForm
 from decks.models import Deck
 from django.views.generic.edit import FormView
@@ -19,3 +19,10 @@ class RegisterTournament(ModelForm):
     def __init__(self, user, *args, **kwargs): #This is what ensures a user selects a deck they own. I have no idea how this works. https://tinyurl.com/36ue7wtb
         super(RegisterTournament, self).__init__(*args, **kwargs)
         self.fields['deck'].queryset = Deck.objects.filter(owner=user)
+
+
+class MatchUserForm(ModelForm):
+
+    class Meta:
+        model = Match
+        fields = ['P1WinCount', 'P2WinCount', 'DrawCount']

@@ -39,6 +39,7 @@ class Match(models.Model):
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
     MatchNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
     complete = models.BooleanField(default=False, null=True, blank=True)
+    isDraw = models.BooleanField(default=False, null=True, blank=True)
     winner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="winner",blank=True, null=True) #field to pin the winner making it easier to grab the winners in one column
 
     def __str__(self):
