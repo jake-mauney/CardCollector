@@ -42,7 +42,7 @@ def Register(request, tour_id): #Handle registration
     if Registration.objects.filter(tournament = tour_id, player = request.user).exists(): #if you are already registered a record will be returned and context will not contain the form for html
        context= {"Tournament": tournament,  "items": items}
     else:
-        form = RegisterTournament(request.POST or None)
+        form = RegisterTournament(request.user, request.POST or None)
         if request.method == 'POST' and form.is_valid():
         #sets the values
             player_form = request.user
