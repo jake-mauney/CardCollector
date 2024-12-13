@@ -67,10 +67,10 @@ def StartTournament(request, tour_id):
 
 def ViewMatch(request, tour_id):
      tour = Tournament.objects.get(pk=tour_id)
-     items = menu_items.objects.filter(login_logout = 'Login')
+     items = menu_items.objects.filter(login_logout = 'LOGIN')
      PageTitle = "Matches for " + tour.title
      currentMatches = Match.objects.filter(tournament = tour, MatchNum = tour.current_match)
-     context = {"Items": items, "PageTitle": PageTitle, "Matches": currentMatches}
+     context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches}
      return render(request, "tournament/match.html", context)
 
 
