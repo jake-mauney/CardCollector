@@ -57,9 +57,23 @@ def Register(request, tour_id): #Handle registration
 
 def StartTournament(request, tour_id):
     tour = Tournament.objects.get(pk=tour_id)
+    items = menu_items.objects.filter(login_logout = 'Login')
+    PageTitle = "Matches for " + tour.title
+    context = {"Items": items, "PageTitle": PageTitle}
     if tour.type == 'SINGLEELIM':
         startTour = StartSingleElim(tour.id)
-    return HttpResponse("You started the tournament")
+        context["Matches"] = startTour
+    return redirect("/tournament/"+str(tour.id)+"/matches")
+
+def ViewMatch(request, tour_id):
+     tour = Tournament.objects.get(pk=tour_id)
+     items = menu_items.objects.filter(login_logout = 'Login')
+     PageTitle = "Matches for " + tour.title
+     currentMatches = Match.objects.filter(tournament = tour, MatchNum = tour.current_match)
+     context = {"Items": items, "PageTitle": PageTitle, "Matches": currentMatches}
+     return render(request, "tournament/match.html", context)
+
+
 
 
     
