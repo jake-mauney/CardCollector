@@ -15,7 +15,7 @@ class Tournament(models.Model):
     scheduled_date = models.DateField(null=True)
     runner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     type = models.CharField(max_length=200, choices=tour_type_options)
-    max_participants = models.IntegerField(null=True, blank=True,)
+    max_participants = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return self.title
 
@@ -37,6 +37,7 @@ class Match(models.Model):
     DrawCount = models.IntegerField()
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
     MatchNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
+    winner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="winner") #field to pin the winner making it easier to grab the winners in one column
 
     def __str__(self):
         return str(self.Player1)+" - "+str(self.Player2)

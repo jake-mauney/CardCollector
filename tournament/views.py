@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import TournamentCreateForm, RegisterTournament
 from .models import Tournament, Registration, Match
 from siteutils.models import menu_items
+from .TourLogic import StartSingleElim
+from django.http import HttpResponse
 
 def TourHome(request): #just shows all tournaments
     TourList = Tournament.objects.all()
@@ -52,3 +54,13 @@ def Register(request, tour_id): #Handle registration
             return redirect("/tournament/"+str(tournament.id))
         context = {"Tournament": tournament, "form": form, "items": items, "current": currentRegistration}
     return render(request, "tournament/register.html", context)
+
+def StartTournament(request, tour_id):
+    tour = Tournament.objects.get(pk=tour_id)
+    if tour.type == 'SINGLEELIM':
+        startTour = StartSingleElim(tour.id)
+    return HttpResponse("You started the tournament")
+
+
+    
+    
