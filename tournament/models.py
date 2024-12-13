@@ -16,6 +16,7 @@ class Tournament(models.Model):
     runner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     type = models.CharField(max_length=200, choices=tour_type_options)
     max_participants = models.IntegerField(null=True, blank=True)
+    current_match = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return self.title
 
@@ -29,15 +30,16 @@ class Registration(models.Model): #join between user deck and tournament
 
 class Match(models.Model):
     Player1 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="Player1") #related name so I can use two foreign key field with Player
-    Player2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="Player2")
-    P1WinCount = models.IntegerField() #win for each so each player can report and validation
-    P2WinCount = models.IntegerField()
-    P1LoseCount = models.IntegerField()
-    P2LoseCount = models.IntegerField()
-    DrawCount = models.IntegerField()
+    Player2 = models.ForeignKey(User, on_delete=models.PROTECT, related_name="Player2", blank=True, null=True)
+    P1WinCount = models.IntegerField(blank=True, null=True) #win for each so each player can report and validation
+    P2WinCount = models.IntegerField(blank=True, null=True)
+    P1LoseCount = models.IntegerField(blank=True, null=True)
+    P2LoseCount = models.IntegerField(blank=True, null=True)
+    DrawCount = models.IntegerField(blank=True, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
     MatchNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
-    winner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="winner") #field to pin the winner making it easier to grab the winners in one column
+    complete = models.BooleanField(default=False, null=True, blank=True)
+    winner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="winner",blank=True, null=True) #field to pin the winner making it easier to grab the winners in one column
 
     def __str__(self):
         return str(self.Player1)+" - "+str(self.Player2)
