@@ -60,13 +60,12 @@ def Register(request, tour_id): #Handle registration
 
 def StartTournament(request, tour_id):
     tour = Tournament.objects.get(pk=tour_id)
-    
-    PageTitle = "Matches for " + tour.title
-    context = {"Items": items, "PageTitle": PageTitle}
-    if tour.type == 'SINGLEELIM':
-        startTour = StartSingleElim(tour.id)
-        context["Matches"] = startTour
-    return redirect("/tournament/"+str(tour.id)+"/matches")
+    if tour.status == 'PLANNED':
+        if tour.type == 'SINGLEELIM':
+            startTour = StartSingleElim(tour.id)
+        return redirect("/tournament/"+str(tour.id)+"/matches")
+    else:
+        return redirect("/tournament/"+str(tour.id)+"/matches")
 
 def ViewMatches(request, tour_id):
      tour = Tournament.objects.get(pk=tour_id)
@@ -74,7 +73,7 @@ def ViewMatches(request, tour_id):
      PageTitle = "Matches for " + tour.title
      currentMatches = Match.objects.filter(tournament = tour, MatchNum = tour.current_match, complete=False)
      byeMatches =  Match.objects.filter(tournament = tour, MatchNum = tour.current_match, complete=True)
-     context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches, "bye": byeMatches}
+     context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches, "bye": byeMatches, "tour": tour}
      return render(request, "tournament/matches.html", context)
 
 def ViewOneMatch(request, match_id):

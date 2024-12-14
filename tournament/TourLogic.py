@@ -20,5 +20,6 @@ def StartSingleElim(tour_id):
     else:
         print("even number of players")
     tour.current_match = 1
+    tour.status = 'IN PROCESS'
     tour.save()
     return matchCollection
