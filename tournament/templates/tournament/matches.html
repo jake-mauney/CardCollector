@@ -3,22 +3,23 @@
 {% block content %}
 
 {% if Matches %}
-
+Round {{ RoundNum }}
 <ul>
     {% for match in Matches %}
-    <li>
-        <b><a href="/tournament/match/{{ match.id }}">{{ match.Player1 }}</b> vs <b>{{ match.Player2 }}</b></a>
-    </li>
-    {% endfor %}
 
-    {% if bye %}
-    {% for by in bye %}
-    <li>{{ by.Player1.first_name }} got the bye</li>
+        {% if match.Player2 is None %}
+        <li>{{ match.Player1.first_name }} got the bye</li>
+        {% endif %}
+        {% if match.Player2 %}
+        <li>
+        <b><a href="/tournament/match/{{ match.id }}">{{ match.Player1 }}</b> vs <b>{{ match.Player2 }}</b></a>
+        </li>
+        {% endif %}
     {% endfor %}
-    {% endif %}
 </ul>
 
-<a href="/tournament/{{ tour.id }}">Return to Tournament Home Page</a>
+<button><a href="/tournament/{{ tour.id }}">Return to Tournament Home Page</a></button>
+<button><a href='/tournament/next/{{tour.id}}'>Next Round</a></button></button>
 
 {% endif %}
 

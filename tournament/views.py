@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import TournamentCreateForm, RegisterTournament, MatchUserForm
 from .models import Tournament, Registration, Match
 from siteutils.models import menu_items
-from .TourLogic import StartSingleElim
+from .TourLogic import StartSingleElim, createPairingsSingle
 from django.http import HttpResponse
 
 
@@ -69,11 +69,9 @@ def StartTournament(request, tour_id):
 
 def ViewMatches(request, tour_id):
      tour = Tournament.objects.get(pk=tour_id)
-     
-     PageTitle = "Matches for " + tour.title
-     currentMatches = Match.objects.filter(tournament = tour, RoundNum = tour.current_round, complete=False)
-     byeMatches =  Match.objects.filter(tournament = tour, RoundNum = tour.current_round, complete=True)
-     context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches, "bye": byeMatches, "tour": tour}
+     PageTitle = "Round " + str(tour.current_round) + " for " + tour.title
+     currentMatches = Match.objects.filter(tournament = tour, RoundNum = tour.current_round)
+     context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches, "tour": tour, "RoundNum": tour.current_round}
      return render(request, "tournament/matches.html", context)
 
 def ViewOneMatch(request, match_id):
@@ -102,7 +100,12 @@ def ViewOneMatch(request, match_id):
 
 def NextRound(request, tour_id):
     tour = Tournament.objects.get(pk=tour_id)
-    return 'null'
+    nextRound = tour.current_round + 1
+    tour.current_round = nextRound
+    if tour.type == 'SINGLEELIM':
+        newMatches = createPairingsSingle(tour, nextRound)
+    tour.save()
+    return redirect("/tournament/"+str(tour.id)+"/matches")
 
 
 
