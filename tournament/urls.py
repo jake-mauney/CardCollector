@@ -8,5 +8,6 @@ urlpatterns = [
     path("register/<str:tour_id>/", views.Register, name="register"),
     path("start/<str:tour_id>/", views.StartTournament, name='StartTour'),
     path("<str:tour_id>/matches/", views.ViewMatches, name="ViewMatches"),
-    path("match/<str:match_id>/", views.ViewOneMatch, name="ViewOneMatch")
+    path("match/<str:match_id>/", views.ViewOneMatch, name="ViewOneMatch"),
+    path("next/<str:tour_id>/", views.NextRound, name='NextRound')
 ]

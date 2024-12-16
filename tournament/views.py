@@ -71,8 +71,8 @@ def ViewMatches(request, tour_id):
      tour = Tournament.objects.get(pk=tour_id)
      
      PageTitle = "Matches for " + tour.title
-     currentMatches = Match.objects.filter(tournament = tour, MatchNum = tour.current_match, complete=False)
-     byeMatches =  Match.objects.filter(tournament = tour, MatchNum = tour.current_match, complete=True)
+     currentMatches = Match.objects.filter(tournament = tour, RoundNum = tour.current_round, complete=False)
+     byeMatches =  Match.objects.filter(tournament = tour, RoundNum = tour.current_round, complete=True)
      context = {"items": items, "PageTitle": PageTitle, "Matches": currentMatches, "bye": byeMatches, "tour": tour}
      return render(request, "tournament/matches.html", context)
 
@@ -99,6 +99,10 @@ def ViewOneMatch(request, match_id):
 
     
     return render(request, "tournament/match.html", context)
+
+def NextRound(request, tour_id):
+    tour = Tournament.objects.get(pk=tour_id)
+    return 'null'
 
 
 

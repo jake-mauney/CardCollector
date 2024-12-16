@@ -4,7 +4,7 @@ from playerprofile.models import Player
 from django.contrib.auth.models import User
 
 format_options = [('STANDARD', 'Standard'), ('PIONEER', 'Pioneer'), ('MODERN', 'Modern'), ('PAUPER', 'Pauper')]
-tour_status_options = [('PLANNED', 'Planned'), ('IN PROCESS', 'In Process'), ("COMPLETE", "Complete"), ("CANCELLED", "Cancelled")]
+tour_status_options = [('PLANNED', 'Planned'), ('IN PROGRESS', 'In Progress'), ("COMPLETE", "Complete"), ("CANCELLED", "Cancelled")]
 tour_type_options = [('RCQ', 'RCQ'), ('SWISS', 'Swiss'), ('SINGLEELIM', 'Single Elimination'), ('ROBIN', 'Round Robin')]
 class Tournament(models.Model):
     title = models.CharField(max_length=200)
@@ -16,7 +16,7 @@ class Tournament(models.Model):
     runner = models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True)
     type = models.CharField(max_length=200, choices=tour_type_options)
     max_participants = models.IntegerField(null=True, blank=True)
-    current_match = models.IntegerField(null=True, blank=True)
+    current_round = models.IntegerField(null=True, blank=True)
     def __str__(self):
         return self.title
 
@@ -37,7 +37,7 @@ class Match(models.Model):
     P2LoseCount = models.IntegerField(blank=True, null=True)
     DrawCount = models.IntegerField(blank=True, null=True)
     tournament = models.ForeignKey(Tournament, on_delete=models.PROTECT)
-    MatchNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
+    RoundNum = models.IntegerField() #tracks which match this is, is it the first match or the 5th?
     complete = models.BooleanField(default=False, null=True, blank=True)
     isDraw = models.BooleanField(default=False, null=True, blank=True)
     winner = models.ForeignKey(User, on_delete=models.PROTECT, related_name="winner",blank=True, null=True) #field to pin the winner making it easier to grab the winners in one column
