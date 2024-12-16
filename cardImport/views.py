@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import CreateImport
+from .forms import CreateImport, CreatImportNoType
 from .models import ImportRequest
 import datetime
 from django.contrib.auth.models import User
@@ -29,3 +29,28 @@ def download_card_template(reqeust):
     response = HttpResponse(file, content_type=mime_type)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response
+
+def ImportDeck(request):
+    items = menu_items.objects.all()
+    form = CreatImportNoType(request.POST,request.FILES)
+    PageTitle = 'Import Deck'
+    context = {"form": form, items: 'items', 'PageTitle': PageTitle}
+    if request.method == 'POST' and form.is_valid():
+        newImport = form.save(commit=False)
+        newImport.owner = request.user
+        newImport.type = 'DECK'
+        newImport.save()
+
+    return render(request, 'cardImport/deckimport.html', context)
+
+def ImportCard(request):
+    items = menu_items.objects.all()
+    form = CreatImportNoType(request.POST,request.FILES)
+    PageTitle = 'Import Deck'
+    context = {"form": form, items: 'items', 'PageTitle': PageTitle}
+    if request.method == 'POST' and form.is_valid():
+        newImport = form.save(commit=False)
+        newImport.owner = request.user
+        newImport.type = 'CARD'
+        newImport.save()
+    return render(request, 'cardImport/deckimport.html', context)

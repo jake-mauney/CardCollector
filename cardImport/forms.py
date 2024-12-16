@@ -7,3 +7,8 @@ class CreateImport(ModelForm):
     class Meta:
         model = ImportRequest
         fields = ['csv_file', 'type'] #only adding the fields needed
+
+class CreatImportNoType(ModelForm):
+    class Meta:
+        model = ImportRequest
+        fields = ['csv_file']

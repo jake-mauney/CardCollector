@@ -1,0 +1,13 @@
+{% extends "siteutils/base.html" %}
+
+{% block content %}
+<!-- where the form is -->
+{% if form %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}</br> <!-- the actual form, this was declared in view -->
+    <button type="submit" class="btn btn-secondary">Import</button> <!-- submit button -->
+</form>
+{% endif %}
+
+{% endblock %}
